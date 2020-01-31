@@ -2,49 +2,47 @@ let id = 0
 let menu = [
     {
         id: 0,
-        item: "Dante's Inferno: The Burger",
-        cost: 12.50,
-        alter_item: 'w/ Bacon and Grilled Onions',
-        alter_item_cost: 2,
-    },
-    {
-        id: 1,
         item: "Grillenium Falcon: Gourmet Grilled Cheese",
         cost: 9.50,
         alter_item: 'w/ Tomato',
-        alter_item_cost: 1,
+        alter_item_cost: 1.00,
+    },
+    {
+        id: 1,
+        item: "Dante's Inferno: The Burger",
+        cost: 12.50,
+        alter_item: 'w/ Bacon and Grilled Onions',
+        alter_item_cost: 2.00,
     },
     {
         id: 2,
         item: "Buddha's Pizza: One With Everything ",
         cost: 15.00,
         alter_item: 'w/ Bacon',
-        alter_item_cost: 2,
+        alter_item_cost: 2.00,
     },
     {
         id: 3,
         item: "Fleetwood Mac & Cheese",
         cost: 10.50,
         alter_item: 'w/ Bacon',
-        alter_item_cost: 2,
+        alter_item_cost: 2.00,
     },
     {
         id: 4,
         item: "Bean Me Up, Scotty- Quinoa, Bean & Veggie Bowl",
         cost: 12.00,
         alter_item: 'w/ Avacado',
-        alter_item_cost: 2,
-        
+        alter_item_cost: 2.00,
     }
-
 ]
 
 
 let orders = [
     {
         id: 0,
-        name: 'Test',
-        item: ['firstItem', 'secondTest'],
+        name: 'OrderTest',
+        item: ['OrderfirstItem', 'OrdersecondTest'],
         quantity: [1, 1],
         cost: [7.50, 12.99],
         alter_item: false,
@@ -53,8 +51,8 @@ let orders = [
     },
     {
         id: 1,
-        name: 'Test2',
-        item: ['firstItem2', 'secondTest2'],
+        name: 'OrderTest2',
+        item: ['OrderfirstItem2', 'OrdersecondTest2'],
         quantity: [1, 1],
         cost: [7.502, 212.992],
         alter_item: true,
@@ -71,6 +69,13 @@ module.exports = {
     },
     getOrders: (req, res) => {
         res.status(200).send(orders)
+    },
+    getOrderById: (req, res) => {
+        let { id } = req.params;
+        let index = orders.findIndex(order => {
+            return +order.id === +id
+        })
+        res.status(200).send(orders[index])
     },
     placeOrder: (req, res) => {
         const { name, item, quantity, cost, alter_item, alter_item_cost } = req.body

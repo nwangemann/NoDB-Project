@@ -1,0 +1,32 @@
+.menuParentBox {
+    background-color: #730000;
+    display: flex;
+    width: 40vw;
+    margin: 2.5vw;
+    border: black solid 2px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.menuItemBox {
+    color: white;
+    width: 30vw;
+    display: flex;
+    font-size: 15px;
+    padding: 2px;
+    flex-direction: column;
+    border: black solid 2px;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.menuItemBox > h1 {
+    font-size: 20px;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 30px;
+}
