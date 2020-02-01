@@ -82,7 +82,7 @@ module.exports = {
     placeOrder: (req, res) => {
         const { name, item, quantity, cost, alt_checked, alter_item, alter_item_cost } = req.body
 
-        let total = parseInt(cost) + parseInt(alter_item_cost)
+        let newTotal = parseInt(cost) + parseInt(alter_item_cost)
 
         let newOrder = {
             id: id++,
@@ -93,7 +93,7 @@ module.exports = {
             alt_checked,
             alter_item,
             alter_item_cost,
-            total: total
+            total: newTotal
         }
     
     orders.push(newOrder)
@@ -103,6 +103,7 @@ module.exports = {
         let { id } = req.params;
 
         let index = orders.findIndex(order => {
+            console.log('order body', order)
             return parseInt(order.id) === parseInt(id)
         })
         console.log('index', index)

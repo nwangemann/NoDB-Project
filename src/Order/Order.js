@@ -26,10 +26,12 @@ class Order extends Component {
 
     handleClick = (e) => {
         let index = e.target.value
-        let foundItem = this.props.orders.findIndex(elem => {
+        let foundIndex = this.props.orders.findIndex(elem => {
             return parseInt(elem.id) === parseInt(index)
         })
-        console.log(foundItem)
+        console.log(foundIndex)
+        let foundItem = this.props.orders[foundIndex]
+        console.log('foundy', foundItem)
         let updatedOrder = {
             id: foundItem.id,
             name: foundItem.name,
@@ -49,7 +51,7 @@ class Order extends Component {
 
     deleteHandler = (e) => {
         let index = e.target.value
-
+        console.log('index', index)
         let foundItem = this.props.orders.findIndex(elem => {
             return parseInt(elem.id) === parseInt(index)
         })
@@ -58,7 +60,7 @@ class Order extends Component {
     }
 
     render(){
-        const mapped = this.props.orders.map(elem => {
+        let mapped = this.props.orders.map(elem => {
             return <div key={elem.id}
             className="orderBox flexElemBox">
                     <div className="flexElem">

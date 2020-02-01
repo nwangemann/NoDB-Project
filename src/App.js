@@ -5,8 +5,8 @@ import Menu from './Menu/Menu'
 import Order from './Order/Order'
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
         orders: [],
