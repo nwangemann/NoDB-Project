@@ -10,15 +10,7 @@ class App extends Component {
 
     this.state = {
         orders: [],
-        menu: [],
-        id: '',
-        name: '',
-        item: '',
-        quantity: '',
-        cost: '',
-        alt_checked: false,
-        alter_item: '',
-        alter_item_cost: ''
+        menu: []
     }
   }
 
@@ -53,6 +45,8 @@ class App extends Component {
         orders: res.data
       })
       this.getOrders()
+    }).catch(err => { 
+      console.log(err) 
     })
   }
 
@@ -61,14 +55,18 @@ class App extends Component {
       this.setState({
         orders: res.data
       })
+    }).catch(err => { 
+      console.log(err) 
     })
   }
 
   updateOrder = (id, updatedOrder) => {
-    axios.put(`/api/edit/${id}`).then(res => {
+    axios.put(`/api/edit/${id}`, updatedOrder).then(res => {
       this.setState({
         orders: res.data
       })
+    }).catch(err => { 
+      console.log(err) 
     })
   }
 

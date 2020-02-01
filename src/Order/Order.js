@@ -13,7 +13,8 @@ class Order extends Component {
             cost: '',
             alt_checked: false, 
             alter_item: '',
-            alter_item_cost: 0
+            alter_item_cost: 0,
+            total: 0
         }
     }
 
@@ -24,37 +25,73 @@ class Order extends Component {
     }
 
     handleClick = (e) => {
-        let id = e.target.value
-        console.log(id)
-        let { quantity } = this.state
-        this.props.updateOrder(id,
-            {
-            quantity
-         })
+        let index = e.target.value
+        let foundItem = this.props.orders.findIndex(elem => {
+            return parseInt(elem.id) === parseInt(index)
+        })
+        console.log(foundItem)
+        let updatedOrder = {
+            id: foundItem.id,
+            name: foundItem.name,
+            item: foundItem.item,
+            quantity: this.state.quantity,
+            cost: foundItem.cost,
+            alt_checked: foundItem.checked,
+            alter_item: foundItem.alter_item,
+            alter_item_cost: foundItem.alter_item_cost,
+            total: foundItem.total
+     }
+        this.props.updateOrder(foundItem, updatedOrder)
         this.setState({
-           quantity: ''
+           quantity: 1
         })
     }
 
+    deleteHandler = (e) => {
+        let index = e.target.value
+
+        let foundItem = this.props.orders.findIndex(elem => {
+            return parseInt(elem.id) === parseInt(index)
+        })
+        console.log('found', foundItem, 'index', index)
+        this.props.deleteOrder(foundItem)
+    }
+
     render(){
-        let mapped = this.props.orders.map(elem => {
-            let total = parseInt(elem.cost) + parseInt(elem.alter_item_cost)
-            return <div className="orderBox">
-                <p>Order for: {elem.name}</p>
-                <ul>
-                <li>{elem.item} qty:{elem.quantity}</li>
-                    <li>{elem.cost}</li>
-                </ul>
-                <h2>Total: {total}</h2>
-                <section><button onClick={this.editToggle} >Delete Order</button></section>
-                {/* <input
-                type="text"
+        const mapped = this.props.orders.map(elem => {
+            return <div key={elem.id}
+            className="orderBox flexElemBox">
+                    <div className="flexElem">
+                    <p className="orderName" >Order for: {elem.name}</p>
+                    </div>
+                    <div className="flexElem">
+                    <ul>
+                    <li className="orderText" >{elem.item}</li>
+                    <li className="orderText" >Qty: {this.state.quantity}</li>
+                    </ul>
+                    </div>
+                    <div className="flexElem">
+                    <h2>Total: {elem.total}</h2>
+                    </div>
+                    <div className="flexElem">
+                    <section><button 
+                    value={elem.id}
+                    onClick={this.deleteHandler}
+                    className="orderButton"
+                     >Delete Order</button></section>
+                    </div>
+                <input
+                type="number"
                 name="quantity"
                 value={this.state.quantity}
-                placeholder="quantity"
+                placeholder="Edit Quantity"
+                className="editField"
                 onChange={this.handleChange}
-                />
-                <button value={elem.id} name={elem.name} id={elem.name} onClick={this.handleClick}>Edit Quantity</button> */}
+                /><button 
+                className="orderButton" 
+                value={elem.id} 
+                name={elem.name} 
+                onClick={this.handleClick} >Edit Quantity</button>
 
             </div>
         })

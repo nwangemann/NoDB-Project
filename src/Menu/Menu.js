@@ -10,17 +10,20 @@ class Menu extends Component {
             id: '',
             name: '',
             item: '',
-            quantity: '',
+            quantity: 1,
             cost: '',
             alt_checked: false,
             alter_item: '',
-            alter_item_cost: ''
+            alter_item_cost: '',
+            total: ''
         }
     }
 
     sendOrder = (e) => {
         let index = e.target.value
         let menuItem = this.props.menu[index]
+        let total = parseInt(menuItem.cost) + parseInt(menuItem.alter_item_cost)
+
         let newOrder = {
             name: this.state.name,
             id: menuItem.id,
@@ -28,7 +31,8 @@ class Menu extends Component {
             cost: menuItem.cost,
             alt_checked: this.state.alt_checked,
             alter_item: this.state.alter_item,
-            alter_item_cost: this.state.alter_item_cost
+            alter_item_cost: this.state.alter_item_cost,
+            total: total
         }
        this.props.placeOrder(newOrder)
     }
@@ -60,43 +64,47 @@ class Menu extends Component {
     
 
     render(){
-        let menuMap = this.props.menu.map(elem => {
-            return <div className="menuItemBox">
+        const menuMap = this.props.menu.map(elem => {
+            return <div 
+                    key="id"
+                    className="menuItemBox">
                         <h1 
-                        id={elem.id} 
-                        key={elem.id} 
-                        className="menuItem">{elem.item}
+                        className="menuItem menuContent">{elem.item}
                         </h1>
                         <p 
-                        id={elem.id} 
-                        key={elem.id} 
                         className="menuContent price">${elem.cost}</p>            
                         <p 
-                        id={elem.id} 
-                        className="menuContent"
-                        key={elem.id}>
+                        className="menuContent">
                         <input 
                         type="checkbox" 
                         value={elem.id} 
-                        key={elem.id}
                         onChange={this.handleCheck} />{elem.alter_item}:   ${elem.alter_item_cost}</p>
                         <button 
+                        className="menuButton"
                         value={elem.id} 
-                        id={elem.id} 
-                        key={elem.id}
                         onClick={this.sendOrder} >Add To Order!</button>
                  </div>
         })
         return(
-            <div className="menuParentBox">
+            <div className="menuParentBox menuDisplay" >
+                <div className="nameDisplayCatch">
+                <div className="nameForOrder">
+                <h3>Enter A Name For Your Order:</h3>
+                </div>
                 <input 
+                className="nameInput"
                 type="text"
                 name="name"
                 value={this.state.name} 
                 placeholder="Enter Name For Order"
                 onChange={this.handleChange} />
-                <h1>Menu:</h1>
+                </div>
+                <div className="menuDisplayCatch">
+                <h1 className="displayedText">Menu:</h1>
+                <div className="menuDisplay">
                 {menuMap}
+                </div>
+                </div>
 
 
             </div>

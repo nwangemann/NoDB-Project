@@ -1,19 +1,25 @@
 .App {
   text-align: center;
   display: flex;
+  background-color: darkred;
+  background-image: linear-gradient(black, indigo, cyan, goldenrod, darkred);
 }
 
 .menuHousing {
   display: flex;
-  margin: 1vw;
+  margin: 10px;
 }
 
 .orderHousing {
   display: flex;
+  margin: 10px;
+  padding-top: 10px;
 }
 
 .mainPageFlex {
   display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }
 
 .header-main {
@@ -26,4 +32,5 @@
   align-items: center;
   font-family: 'Molle', cursive;
   font-size: 30px;
+  text-shadow: 1px 5px 15px yellow;
 }
