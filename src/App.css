@@ -5,5 +5,25 @@
 
 .menuHousing {
   display: flex;
-  margin: 5vw;
+  margin: 1vw;
+}
+
+.orderHousing {
+  display: flex;
+}
+
+.mainPageFlex {
+  display: flex;
+}
+
+.header-main {
+  width: 100vw;
+  background-color: black;
+  color: yellow;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Molle', cursive;
+  font-size: 30px;
 }

@@ -1,0 +1,19 @@
+.orderBox {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 13px;
+    flex-wrap: wrap;
+    height: 50px;
+    margin: 2px;
+
+}
+
+.orderParent {
+    display: flex;
+    margin: 2px;
+    flex-direction: column;
+    padding: 2px;
+}

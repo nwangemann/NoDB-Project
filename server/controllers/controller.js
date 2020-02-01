@@ -41,21 +41,23 @@ let menu = [
 let orders = [
     {
         id: 0,
-        name: 'OrderTest',
-        item: ['OrderfirstItem', 'OrdersecondTest'],
-        quantity: [1, 1],
-        cost: [7.50, 12.99],
-        alter_item: false,
+        name: 'Roberta',
+        item: 'First Item',
+        quantity:  1,
+        cost: 12.99,
+        alt_checked: false,
+        alter_item: 'w/ Bacon',
         alter_item_cost: 0,
         total: ''
     },
     {
         id: 1,
-        name: 'OrderTest2',
-        item: ['OrderfirstItem2', 'OrdersecondTest2'],
-        quantity: [1, 1],
-        cost: [7.502, 212.992],
-        alter_item: true,
+        name: 'Tyler',
+        item: 'Order Item',
+        quantity: 1,
+        cost: 7.50,
+        alt_checked: true,
+        alter_item: 'w/ Avacado',
         alter_item_cost: 2,
         total: ''
     },
@@ -78,7 +80,7 @@ module.exports = {
         res.status(200).send(orders[index])
     },
     placeOrder: (req, res) => {
-        const { name, item, quantity, cost, alter_item, alter_item_cost } = req.body
+        const { name, item, quantity, cost, alt_checked, alter_item, alter_item_cost } = req.body
 
         let newOrder = {
             id: id++,
@@ -86,6 +88,7 @@ module.exports = {
             item,
             quantity,
             cost,
+            alt_checked,
             alter_item,
             alter_item_cost
         }
@@ -104,7 +107,7 @@ module.exports = {
     },
     editOrder: (req, res) => {
         let { id } = req.params;
-        let {  name, item, quantity, cost, alter_item, alter_item_cost  } = req.body
+        let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost  } = req.body
         let index = orders.findIndex(order => {
             return +order.id === +id
         })
@@ -115,6 +118,7 @@ module.exports = {
             item,
             quantity,
             cost,
+            alt_checked,
             alter_item,
             alter_item_cost
         }

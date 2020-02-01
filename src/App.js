@@ -2,25 +2,29 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
 import Menu from './Menu/Menu'
+import Order from './Order/Order'
 
 class App extends Component {
   constructor(){
     super()
 
     this.state = {
+        orders: [],
         menu: [],
         id: '',
         name: '',
         item: '',
         quantity: '',
         cost: '',
-        alter_item: false,
+        alt_checked: false,
+        alter_item: '',
         alter_item_cost: ''
     }
   }
 
   componentDidMount(){
     this.getMenu()
+    this.getOrders()
   }
 
   getMenu = () => {
@@ -33,17 +37,62 @@ class App extends Component {
     })
   }
 
+  getOrders = () => {
+    axios.get(`/api/orders`).then(res => {
+      this.setState({
+        orders: res.data
+      })
+    }).catch(err => { 
+      console.log(err) 
+    })
+  }
+
+  placeOrder = (newOrder) => {
+    axios.post('/api/create', newOrder).then(res => {
+      this.setState({
+        orders: res.data
+      })
+      this.getOrders()
+    })
+  }
+
+  deleteOrder = (id) => {
+    axios.delete(`/api/delete/${id}`).then(res => {
+      this.setState({
+        orders: res.data
+      })
+    })
+  }
+
+  updateOrder = (id, updatedOrder) => {
+    axios.put(`/api/edit/${id}`).then(res => {
+      this.setState({
+        orders: res.data
+      })
+    })
+  }
 
 
   render(){
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          NoDB
-        </p>
-        <div className="menuHousing">
-        <Menu menu={this.state.menu} />
+        <div className="header-main"> 
+          <h1>Server Side Bar & Grill</h1>
+
+        </div>
+        <div className="mainPageFlex">
+          <div className="menuHousing">
+          <Menu 
+          menu={this.state.menu} 
+          placeOrder={this.placeOrder} />
+          </div>
+          <div className="orderHousing">
+            <Order 
+            deleteOrder={this.deleteOrder}
+            updateOrder={this.updateOrder}
+            orders={this.state.orders} />
+          </div>
         </div>
       </header>
     </div>
