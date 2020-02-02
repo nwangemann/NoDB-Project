@@ -43,9 +43,9 @@ class Order extends Component {
     }
 
     deleteHandler = (e) => {
-        let foundName = e.target.name
+        let id = e.target.id
         let foundIndex = this.props.orders.findIndex(elem => {
-            return elem.name === foundName
+            return parseInt(elem.id) === parseInt(id)
         })
         this.props.deleteOrder(foundIndex)
     }
@@ -81,12 +81,12 @@ class Order extends Component {
                 onClick={this.handleClick} >Edit Quantity</button>
                     </div>
                     <div className="flexElem">
-                    <section><button 
+                    <button 
                     value={elem.id}
                     name={elem.name}
                     onClick={this.deleteHandler}
                     className="orderButton"
-                     >Delete Order</button></section>
+                     >Delete Order</button>
                     </div>
 
             </div>

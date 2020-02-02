@@ -50,8 +50,8 @@ class App extends Component {
     })
   }
 
-  deleteOrder = (name) => {
-    axios.delete(`/api/cancel/${name}`).then(res => {
+  deleteOrder = (id) => {
+    axios.delete(`/api/cancel/${id}`).then(res => {
       this.setState({
         orders: res.data
       })

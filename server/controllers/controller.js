@@ -97,10 +97,10 @@ module.exports = {
     res.status(200).send(orders)
     },
     deleteOrder: (req, res) => {
-        let { name } = req.params;
+        let { id } = req.params;
 
         let index = orders.findIndex(order => {
-            return order.name === name
+            return parseInt(order.id) === parseInt(id)
         })
         orders.splice(index, 1)
         res.status(200).send(orders)
@@ -112,7 +112,7 @@ module.exports = {
             return parseInt(order.id) === parseInt(id)
         })
 
-        let newTotal = parseInt(total)*parseInt(quantity)
+        let newTotal = (parseInt(total))*(parseInt(quantity))
         
 
         let updatedOrder = {
