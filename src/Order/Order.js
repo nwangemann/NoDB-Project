@@ -6,15 +6,8 @@ class Order extends Component {
         super(props)
 
         this.state = {
-            id: '',
-            name: '',
-            item: '',
             quantity: 1,
-            cost: '',
-            alt_checked: false, 
-            alter_item: '',
-            alter_item_cost: 0,
-            total: 0
+            
         }
     }
 
@@ -29,34 +22,32 @@ class Order extends Component {
         let foundIndex = this.props.orders.findIndex(elem => {
             return parseInt(elem.id) === parseInt(index)
         })
-        console.log(foundIndex)
+        console.log(foundIndex, "foundindex")
         let foundItem = this.props.orders[foundIndex]
-        console.log('foundy', foundItem)
+        console.log('foundItem', foundItem)
         let updatedOrder = {
             id: foundItem.id,
             name: foundItem.name,
             item: foundItem.item,
             quantity: this.state.quantity,
             cost: foundItem.cost,
-            alt_checked: foundItem.checked,
+            alt_checked: foundItem.alt_checked,
             alter_item: foundItem.alter_item,
             alter_item_cost: foundItem.alter_item_cost,
             total: foundItem.total
      }
-        this.props.updateOrder(foundItem, updatedOrder)
+        this.props.editOrder(foundIndex, updatedOrder)
         this.setState({
            quantity: 1
         })
     }
 
     deleteHandler = (e) => {
-        let index = e.target.value
-        console.log('index', index)
-        let foundItem = this.props.orders.findIndex(elem => {
-            return parseInt(elem.id) === parseInt(index)
+        let foundName = e.target.name
+        let foundIndex = this.props.orders.findIndex(elem => {
+            return elem.name === foundName
         })
-        console.log('found', foundItem, 'index', index)
-        this.props.deleteOrder(foundItem)
+        this.props.deleteOrder(foundIndex)
     }
 
     render(){
@@ -69,31 +60,34 @@ class Order extends Component {
                     <div className="flexElem">
                     <ul>
                     <li className="orderText" >{elem.item}</li>
-                    <li className="orderText" >Qty: {this.state.quantity}</li>
+                    <li className="orderText" >Qty: {elem.quantity}</li>
                     </ul>
                     </div>
                     <div className="flexElem">
-                    <h2>Total: {elem.total}</h2>
+                    <h2>Total: ${elem.total}</h2>
                     </div>
                     <div className="flexElem">
-                    <section><button 
-                    value={elem.id}
-                    onClick={this.deleteHandler}
-                    className="orderButton"
-                     >Delete Order</button></section>
-                    </div>
-                <input
+                    <input
                 type="number"
                 name="quantity"
-                value={this.state.quantity}
                 placeholder="Edit Quantity"
                 className="editField"
                 onChange={this.handleChange}
-                /><button 
+                />
+                <button 
                 className="orderButton" 
                 value={elem.id} 
                 name={elem.name} 
                 onClick={this.handleClick} >Edit Quantity</button>
+                    </div>
+                    <div className="flexElem">
+                    <section><button 
+                    value={elem.id}
+                    name={elem.name}
+                    onClick={this.deleteHandler}
+                    className="orderButton"
+                     >Delete Order</button></section>
+                    </div>
 
             </div>
         })

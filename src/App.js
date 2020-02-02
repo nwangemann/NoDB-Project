@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import Menu from './Menu/Menu'
 import Order from './Order/Order'
+import image from './a.jpg'
 
 class App extends Component {
   constructor(props){
@@ -44,14 +45,13 @@ class App extends Component {
       this.setState({
         orders: res.data
       })
-      this.getOrders()
     }).catch(err => { 
       console.log(err) 
     })
   }
 
-  deleteOrder = (id) => {
-    axios.delete(`/api/delete/${id}`).then(res => {
+  deleteOrder = (name) => {
+    axios.delete(`/api/cancel/${name}`).then(res => {
       this.setState({
         orders: res.data
       })
@@ -60,7 +60,7 @@ class App extends Component {
     })
   }
 
-  updateOrder = (id, updatedOrder) => {
+  editOrder = (id, updatedOrder) => {
     axios.put(`/api/edit/${id}`, updatedOrder).then(res => {
       this.setState({
         orders: res.data
@@ -76,8 +76,9 @@ class App extends Component {
     <div className="App">
       <header className="App-header">
         <div className="header-main"> 
+        <img className="headerImage" src={image} alt="image" />
           <h1>Server Side Bar & Grill</h1>
-
+          <img className="headerImage" src={image} alt="image" />
         </div>
         <div className="mainPageFlex">
           <div className="menuHousing">
@@ -88,7 +89,7 @@ class App extends Component {
           <div className="orderHousing">
             <Order 
             deleteOrder={this.deleteOrder}
-            updateOrder={this.updateOrder}
+            editOrder={this.editOrder}
             orders={this.state.orders} />
           </div>
         </div>

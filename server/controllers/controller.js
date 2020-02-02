@@ -37,7 +37,6 @@ let menu = [
     }
 ]
 
-
 let orders = [
     {
         id: 0,
@@ -80,9 +79,7 @@ module.exports = {
         res.status(200).send(orders[index])
     },
     placeOrder: (req, res) => {
-        const { name, item, quantity, cost, alt_checked, alter_item, alter_item_cost } = req.body
-
-        let newTotal = parseInt(cost) + parseInt(alter_item_cost)
+        const { name, item, quantity, cost, alt_checked, alter_item, alter_item_cost, total } = req.body
 
         let newOrder = {
             id: id++,
@@ -93,33 +90,29 @@ module.exports = {
             alt_checked,
             alter_item,
             alter_item_cost,
-            total: newTotal
+            total
         }
     
     orders.push(newOrder)
     res.status(200).send(orders)
     },
     deleteOrder: (req, res) => {
-        let { id } = req.params;
+        let { name } = req.params;
 
         let index = orders.findIndex(order => {
-            console.log('order body', order)
-            return parseInt(order.id) === parseInt(id)
+            return order.name === name
         })
-        console.log('index', index)
-        console.log('pre-slice', orders)
         orders.splice(index, 1)
-        console.log('post-slice', orders)
         res.status(200).send(orders)
     },
     editOrder: (req, res) => {
         let { id } = req.params;
-        let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost  } = req.body
+        let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost, total  } = req.body
         let index = orders.findIndex(order => {
             return parseInt(order.id) === parseInt(id)
         })
 
-        let total = parseInt(cost) + parseInt(alter_item_cost)
+        let newTotal = parseInt(total)*parseInt(quantity)
         
 
         let updatedOrder = {
@@ -131,7 +124,7 @@ module.exports = {
             alt_checked,
             alter_item,
             alter_item_cost,
-            total: total
+            total: newTotal
         }
         
         orders.splice(index, 1, updatedOrder)

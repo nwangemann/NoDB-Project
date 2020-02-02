@@ -7,11 +7,8 @@ class Menu extends Component {
         
 
         this.state = {
-            id: '',
+            id: 2,
             name: '',
-            item: '',
-            quantity: 1,
-            cost: '',
             alt_checked: false,
             alter_item: '',
             alter_item_cost: '',
@@ -22,17 +19,19 @@ class Menu extends Component {
     sendOrder = (e) => {
         let index = e.target.value
         let menuItem = this.props.menu[index]
-        let total = parseInt(menuItem.cost) + parseInt(menuItem.alter_item_cost)
+        let newTotal = parseInt(menuItem.cost) + parseInt(this.state.alter_item_cost)
+       
 
         let newOrder = {
+            id: null,
             name: this.state.name,
-            id: menuItem.id,
             item: menuItem.item,
+            quantity: 1,
             cost: menuItem.cost,
             alt_checked: this.state.alt_checked,
-            alter_item: this.state.alter_item,
+            alter_item: menuItem.alter_item,
             alter_item_cost: this.state.alter_item_cost,
-            total: total
+            total: newTotal
         }
        this.props.placeOrder(newOrder)
     }
@@ -66,7 +65,6 @@ class Menu extends Component {
     render(){
         const menuMap = this.props.menu.map(elem => {
             return <div 
-                    key="id"
                     className="menuItemBox">
                         <h1 
                         className="menuItem menuContent">{elem.item}
@@ -79,10 +77,12 @@ class Menu extends Component {
                         type="checkbox" 
                         value={elem.id} 
                         onChange={this.handleCheck} />{elem.alter_item}:   ${elem.alter_item_cost}</p>
+                        <div className="buttonFlexBox">
                         <button 
                         className="menuButton"
                         value={elem.id} 
                         onClick={this.sendOrder} >Add To Order!</button>
+                        </div>
                  </div>
         })
         return(
