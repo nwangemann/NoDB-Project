@@ -37,12 +37,13 @@
     border-radius: 14px;
     border: 24px outset white;
     width: 30vw;
-    margin: 10px;
+    margin: 20px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     height: 50vh;
     background-color:  rgb(82, 238, 247);
+    margin-top: 10px;
 }
 
 .orderButton {

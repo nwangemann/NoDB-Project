@@ -9,12 +9,16 @@
 .menuHousing {
   display: flex;
   margin: 10px;
+  box-shadow: 0px 0px 55px 10px black;
+
 }
 
 .orderHousing {
   display: flex;
-  margin: 10px;
+  margin: 15px;
   padding-top: 10px;
+  box-shadow: 0px 0px 55px 10px black;
+
 }
 
 .mainPageFlex {
@@ -42,5 +46,5 @@
   height: 5vh;
   opacity: 0.4;
   filter: alpha(opacity=50); 
-  box-shadow: 0px 0px 20px 1px rgb(82, 238, 247);
+  box-shadow: 2px 2px 35px 10px rgb(82, 238, 247);
 }

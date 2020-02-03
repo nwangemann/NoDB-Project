@@ -12,18 +12,16 @@ class Order extends Component {
 
   handleChange = e => {
     this.setState({
-      quantity: e.target.value
+      quantity: parseInt(e.target.value)
     });
   };
 
   handleClick = e => {
-    let index = e.target.value;
+    let index = parseInt(e.target.value);
     let foundIndex = this.props.orders.findIndex(elem => {
       return parseInt(elem.id) === parseInt(index);
     });
-    console.log(foundIndex, "foundindex");
     let foundItem = this.props.orders[foundIndex];
-    console.log("foundItem", foundItem);
     let updatedOrder = {
       id: parseInt(foundItem.id),
       name: foundItem.name,
@@ -42,7 +40,7 @@ class Order extends Component {
   };
 
   deleteHandler = e => {
-    let id = e.target.value;
+    let id = parseInt(e.target.value);
     let foundIndex = this.props.orders.findIndex(elem => {
       return parseInt(elem.id) === parseInt(id);
     });

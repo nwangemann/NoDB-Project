@@ -7,11 +7,11 @@ class Menu extends Component {
         
 
         this.state = {
-            id: 2,
+            id: '',
             name: '',
             alt_checked: false,
             alter_item: '',
-            alter_item_cost: '',
+            alter_item_cost: 0,
             total: ''
         }
     }
@@ -23,15 +23,15 @@ class Menu extends Component {
        
 
         let newOrder = {
-            id: null,
+            id: '',
             name: this.state.name,
             item: menuItem.item,
             quantity: 1,
-            cost: menuItem.cost,
+            cost: parseInt(menuItem.cost),
             alt_checked: this.state.alt_checked,
             alter_item: menuItem.alter_item,
-            alter_item_cost: this.state.alter_item_cost,
-            total: newTotal
+            alter_item_cost: parseInt(this.state.alter_item_cost),
+            total: parseInt(newTotal)
         }
        this.props.placeOrder(newOrder)
     }
@@ -43,7 +43,7 @@ class Menu extends Component {
         if(check){
             this.setState({
                 alt_checked: true,
-                alter_item_cost: menuItem.alter_item_cost
+                alter_item_cost: parseInt(menuItem.alter_item_cost)
             })
         } else if (!check){
             this.setState({
