@@ -76,9 +76,9 @@ class App extends Component {
     <div className="App">
       <header className="App-header">
         <div className="header-main"> 
-        <img className="headerImage" src={image} alt="image" />
+        <img className="headerImage" src={image} alt="" />
           <h1>Server Side Bar & Grill</h1>
-          <img className="headerImage" src={image} alt="image" />
+          <img className="headerImage" src={image} alt="" />
         </div>
         <div className="mainPageFlex">
           <div className="menuHousing">

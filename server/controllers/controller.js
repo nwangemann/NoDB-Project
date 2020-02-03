@@ -74,7 +74,7 @@ module.exports = {
     getOrderById: (req, res) => {
         let { id } = req.params;
         let index = orders.findIndex(order => {
-            return +order.id === +id
+            return parseInt(order.id) === parseInt(id)
         })
         res.status(200).send(orders[index])
     },
@@ -82,15 +82,15 @@ module.exports = {
         const { name, item, quantity, cost, alt_checked, alter_item, alter_item_cost, total } = req.body
 
         let newOrder = {
-            id: id++,
+            id: parseInt(id++),
             name,
             item,
-            quantity,
-            cost,
+            quantity: parseInt(quantity),
+            cost: parseInt(cost),
             alt_checked,
             alter_item,
-            alter_item_cost,
-            total
+            alter_item_cost: parseInt(alter_item_cost),
+            total: parseInt(total)
         }
     
     orders.push(newOrder)
@@ -106,12 +106,12 @@ module.exports = {
         res.status(200).send(orders)
     },
     editOrder: (req, res) => {
-        let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost, total  } = req.body
+        let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost  } = req.body
         let index = orders.findIndex(order => {
             return parseInt(order.id) === parseInt(id)
         })
 
-        let newTotal = (parseInt(total))*(parseInt(quantity))
+        let newTotal = (parseInt(cost) + parseInt(alter_item_cost))*(parseInt(quantity))
         
 
         let updatedOrder = {

@@ -25,15 +25,15 @@ class Order extends Component {
     let foundItem = this.props.orders[foundIndex];
     console.log("foundItem", foundItem);
     let updatedOrder = {
-      id: foundItem.id,
+      id: parseInt(foundItem.id),
       name: foundItem.name,
       item: foundItem.item,
-      quantity: this.state.quantity,
-      cost: foundItem.cost,
+      quantity: parseInt(this.state.quantity),
+      cost: parseInt(foundItem.cost),
       alt_checked: foundItem.alt_checked,
       alter_item: foundItem.alter_item,
-      alter_item_cost: foundItem.alter_item_cost,
-      total: foundItem.total
+      alter_item_cost: parseInt(foundItem.alter_item_cost),
+      total: parseInt(foundItem.total)
     };
     this.props.editOrder(foundIndex, updatedOrder);
     this.setState({
@@ -46,7 +46,6 @@ class Order extends Component {
     let foundIndex = this.props.orders.findIndex(elem => {
       return parseInt(elem.id) === parseInt(id);
     });
-    console.log("foundIndex", foundIndex);
     this.props.deleteOrder(foundIndex);
   };
 
