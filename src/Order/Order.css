@@ -14,7 +14,7 @@
 }
 
 .orderName {
-    font-family: 'Molle', cursive;
+    font-family: 'Righteous', cursive;
     font-size: 25px;
 }
 
@@ -29,6 +29,8 @@
     display: flex;
     justify-content: flex-start;
     font-family: 'Sigmar One', cursive;
+    margin: -3px;
+    font-size: 18px;
 }
 
 .flexElemBox {
@@ -51,8 +53,8 @@
     background-color: #410270;
     justify-content: center;
     align-items: center;
-    font-family: 'Sigmar One', cursive;
-    font-size: 15px;
+    font-family: 'Righteous', cursive;
+    font-size: 18px;
     opacity: 0.87;
     filter: alpha(opacity=50); 
 }

@@ -40,7 +40,7 @@
 
 .nameForOrder {
     font-size: 25px;
-    font-family: 'Molle', cursive;
+    font-family: 'Righteous', cursive;
 }
 
 .nameInput {
@@ -66,8 +66,8 @@
     background-color: #410270;
     justify-content: center;
     align-items: center;
-    font-family: 'Sigmar One', cursive;
-    font-size: 15px;
+    font-family: 'Righteous', cursive;
+    font-size: 18px;
     display: flex;
     opacity: 0.87;
     filter: alpha(opacity=90);
@@ -99,7 +99,7 @@
 }
 
 .displayedText {
-    font-family: 'Molle', cursive;
+    font-family: 'Righteous', cursive;
     color: black;
     font-size: 65px;
     margin: -3px;

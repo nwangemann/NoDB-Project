@@ -31,9 +31,9 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-family: 'Molle', cursive;
+  font-family: 'Righteous', cursive;
   font-size: 30px;
-  text-shadow: 1px 5px 15px rgb(82, 238, 247);
+  text-shadow: 1px 5px 25px rgb(82, 238, 247);
 }
 
 .headerImage {
