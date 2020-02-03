@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    border: white inset 24px;
+    border: white outset 24px;
 }
 
 .menuItemBox {
@@ -55,7 +55,7 @@
 .menuDisplay {
     display: flex;
     flex-direction: column;
-    background-color: rgb(119, 239, 245);
+    background-color: rgb(82, 238, 247);
 }
 
 .menuButton {

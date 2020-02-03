@@ -106,7 +106,6 @@ module.exports = {
         res.status(200).send(orders)
     },
     editOrder: (req, res) => {
-        let { id } = req.params;
         let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost, total  } = req.body
         let index = orders.findIndex(order => {
             return parseInt(order.id) === parseInt(id)
@@ -116,15 +115,15 @@ module.exports = {
         
 
         let updatedOrder = {
-            id,
+            id: parseInt(req.params.id),
             name,
             item,
-            quantity,
-            cost,
+            quantity: parseInt(quantity),
+            cost: parseInt(cost),
             alt_checked,
             alter_item,
-            alter_item_cost,
-            total: newTotal
+            alter_item_cost: parseInt(alter_item_cost),
+            total: parseInt(newTotal)
         }
         
         orders.splice(index, 1, updatedOrder)
