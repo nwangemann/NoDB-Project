@@ -107,6 +107,7 @@ module.exports = {
     },
     editOrder: (req, res) => {
         let {  name, item, quantity, cost, alt_checked, alter_item, alter_item_cost  } = req.body
+        let {id} = req.params
         let index = orders.findIndex(order => {
             return parseInt(order.id) === parseInt(id)
         })
@@ -115,7 +116,7 @@ module.exports = {
         
 
         let updatedOrder = {
-            id: parseInt(req.params.id),
+            id: parseInt(id),
             name,
             item,
             quantity: parseInt(quantity),

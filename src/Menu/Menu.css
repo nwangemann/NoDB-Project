@@ -66,6 +66,7 @@
     background-color: #410270;
     justify-content: center;
     align-items: center;
+    margin: 4px;
     font-family: 'Righteous', cursive;
     font-size: 18px;
     display: flex;

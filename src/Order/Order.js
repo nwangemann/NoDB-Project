@@ -6,18 +6,30 @@ class Order extends Component {
     super(props);
 
     this.state = {
-      quantity: 1
+      quantity: 1,
+      editView: false
     };
   }
 
   handleChange = e => {
     this.setState({
-      quantity: parseInt(e.target.value)
+      editView: true
     });
   };
 
+  handleQuantity = e => {
+    console.log(e.target.value)
+    this.setState({
+      quantity: e.target.value
+    });
+  };
+
+
+
   handleClick = e => {
+    console.log('this.state.quantity', this.state.quantity)
     let index = parseInt(e.target.value);
+    
     let foundIndex = this.props.orders.findIndex(elem => {
       return parseInt(elem.id) === parseInt(index);
     });
@@ -35,7 +47,8 @@ class Order extends Component {
     };
     this.props.editOrder(foundIndex, updatedOrder);
     this.setState({
-      quantity: 1
+      quantity: 1,
+      editView: false
     });
   };
 
@@ -56,7 +69,14 @@ class Order extends Component {
           </div>
           <div className="flexElem">
             <ul>
-              <li className="orderText">{elem.item}</li>
+              {elem.alt_checked ? (
+                <div>
+                  <li className="orderText">{elem.item}</li>
+                  <li className="orderText">{elem.alter_item}</li>
+                </div>
+              ) : (
+                <li className="orderText">{elem.item}</li>
+              )}
               <li className="orderText">Qty: {elem.quantity}</li>
             </ul>
           </div>
@@ -64,21 +84,35 @@ class Order extends Component {
             <h2>Total: ${elem.total}</h2>
           </div>
           <div className="flexElem">
-            <input
-              type="number"
-              name="quantity"
-              placeholder="Edit Quantity"
-              className="editField"
-              onChange={this.handleChange}
-            />
-            <button
-              className="orderButton"
-              value={elem.id}
-              name={elem.name}
-              onClick={this.handleClick}
-            >
-              Edit Quantity
-            </button>
+            {this.state.editView ? (
+              <div>
+                <input
+                  type="number"
+                  name="quantity"
+                  className="editField"
+                  onChange={this.handleQuantity}
+                />
+                <button
+                  className="saveButton orderButton"
+                  value={elem.id}
+                  name={elem.name}
+                  onClick={this.handleClick}
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button
+                  className="orderButton"
+                  value={elem.id}
+                  name={elem.name}
+                  onClick={this.handleChange}
+                >
+                  Edit Order
+                </button>
+              </div>
+            )}
           </div>
           <div className="flexElem">
             <button
